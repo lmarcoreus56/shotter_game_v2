@@ -5,9 +5,19 @@ var angular_speed = PI
 
 
 func _process(delta: float):    
-    rotation += angular_speed * delta
-    var velocity = Vector2.UP.rotated(rotation) * speed
+    var direction = 0 
+    var velocity = Vector2.ZERO
+    if Input.is_action_pressed("ui_left"):
+        direction = -1
+    if Input.is_action_pressed("ui_right"):
+        direction = 1
+    rotation += angular_speed * direction * delta
+
+    if Input.is_action_pressed("ui_up"):
+        velocity = Vector2.UP.rotated(rotation) * speed
+    
     position += velocity * delta
+
 
 func _init():
     print("Hello Wold")
